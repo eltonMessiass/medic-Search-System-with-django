@@ -4,6 +4,7 @@ from medicSearch.models import Profile
 
 from django.db.models import Q 
 
+from django.core.paginator import Paginator
 
 def list_medics_view(request):
     name = request.GET.get("name")

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from medicSearch.models import Profile
 
@@ -41,3 +41,14 @@ def list_medics_view(request):
     }
 
     return render(request, template_name='medic/medics.html', context=context, status=200)
+
+
+def add_favorite_view(request):
+    page = request.POST.get('page')
+    name = request.POST.get('name')
+    speciality = request.POST.get('speciality')
+    neighborhood = request.POST.get('neighborhood')
+    city = request.POST.get('city')
+    state = request.POST.get('state')
+    id = request.POST.get('id')
+    

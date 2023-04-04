@@ -51,4 +51,36 @@ def add_favorite_view(request):
     city = request.POST.get('city')
     state = request.POST.get('state')
     id = request.POST.get('id')
+
+    try:
+        profile = Profile.objects.filter(user=request.user).first()
+
+        medic - Profile.objects.filter(user__id=id).first()
+        profile.favorites.add(medic.user)
+        profile.save()
+        msg = "Favorito adicionado com sucesso."
+        _type = 'success'
+    except Exception as e:
+        print("Erro %s" % e)
+        msg = "Um erro ocorreu ao salvar o médico nos favoritos"
+        _type = "danger"
     
+
+    if page:
+        arguments = "?page=%s" % (page)
+    else:
+        arguments = "?page=1"
+    if name:
+        arguments += "&name=%s" % name
+    if speciality:
+        arguments += "&speciality=%s" % speciality
+    if neighborhood:
+        arguments += "&neighborhood=%s" % neighborhood
+    if city:
+        arguments += "&city=%s" % city
+    if state:
+        arguments += "&state=%s" % state
+    
+    arguments += "&msg=%s&type=%s" % (msg, _type)
+
+    return redirect(to='/medic/%s' % arguments)
